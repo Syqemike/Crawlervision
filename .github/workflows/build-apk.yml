@@ -50,6 +50,12 @@ jobs:
           sed -i 's/\.setTextAllCaps(false)/.setAllCaps(false)/g' CrawlerVision/app/src/main/java/com/example/crawlervision/MainActivity.java
           ! grep -q 'setTextAllCaps' CrawlerVision/app/src/main/java/com/example/crawlervision/MainActivity.java
 
+      - name: Add scene pack importer to Android app
+        run: |
+          python3 scripts/add_scene_pack_import.py
+          sed -i "s/versionCode 1/versionCode 2/g; s/versionName '0.1.0'/versionName '0.2.0'/g" CrawlerVision/app/build.gradle
+          sed -i 's/CrawlerVision Test/CrawlerVision/g' CrawlerVision/app/src/main/AndroidManifest.xml
+
       - name: Build Android debug APK
         working-directory: CrawlerVision
         run: gradle --no-daemon --stacktrace assembleDebug
@@ -67,10 +73,10 @@ jobs:
         shell: bash
         run: |
           cp CrawlerVision/app/build/outputs/apk/debug/app-debug.apk CrawlerVision-debug.apk
-          if gh release view android-test-v1 >/dev/null 2>&1; then
-            gh release upload android-test-v1 CrawlerVision-debug.apk --clobber
+          if gh release view android-test-v2 >/dev/null 2>&1; then
+            gh release upload android-test-v2 CrawlerVision-debug.apk --clobber
           else
-            gh release create android-test-v1 CrawlerVision-debug.apk \
-              --title 'CrawlerVision Android Test v1' \
-              --notes 'Debug APK for Amazon Music media-session diagnostics. Uses generic demo scenes. Real-world audiobook sync is not yet validated.'
+            gh release create android-test-v2 CrawlerVision-debug.apk \
+              --title 'CrawlerVision Android Test v2' \
+              --notes 'Debug APK adding JSON scene-pack import with Chapter 1 timestamp switching. Generic demo artwork remains; real image packs are not integrated yet.'
           fi
