@@ -64,6 +64,6 @@ jobs:
             gh release upload crawlervision-chapter1-v1 CrawlerVision-Test.apk --clobber
           else
             gh release create crawlervision-chapter1-v1 CrawlerVision-Test.apk \
-              --title 'CrawlerVision Chapter 1 APK' \
-              --notes 'Sideloadable CrawlerVision APK with the Chapter 1 dropdown and bundled scene art.'
+              --title 'CrawlerVision Chapters 1-10 APK' \
+              --notes 'Sideloadable CrawlerVision APK with Chapters 1-10, 44 bundled scene illustrations, and a chapter dropdown.'
           fi

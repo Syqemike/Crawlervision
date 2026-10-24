@@ -1,7 +1,9 @@
-# Crawlervision
+CrawlerVision 1.2 — Dungeon Crawler Carl, Chapters 1–10
 
-Android audiobook companion app. GitHub Actions builds a sideloadable debug APK with the built-in **Chapter 1** dropdown and bundled story illustrations.
+This kit includes:
+- CrawlerVision_Android_Source.zip: Android project with all 44 scene images and bundled timing data for Chapters 1–10.
+- book_scene_packs.json: readable standalone chapter timeline and image index.
+- build-apk.yml: GitHub Actions workflow for a sideloadable debug APK.
+- HOW_TO_BUILD_ON_PHONE.md: phone-first build and install instructions.
 
-Open **Releases** and download `CrawlerVision-Test.apk` after the build completes. Install it on the Samsung phone, grant notification access to CrawlerVision, then play Dungeon Crawler Carl — Chapter 1 in Amazon Music.
-
-Chapter length: 20:40. Scene boundaries are estimated; the display follows Amazon Music's media-session timestamp.
+The app displays scenes using Amazon Music's Android media-session position. Chapter durations follow the provided audiobook chapter list. Scene boundaries are estimates. CrawlerVision does not record or upload audio.
