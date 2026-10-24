@@ -64,11 +64,11 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          cp CrawlerVision/app/build/outputs/apk/debug/app-debug.apk CrawlerVision-Test.apk
+          cp CrawlerVision/app/build/outputs/apk/debug/app-debug.apk CrawlerVision-Chapters-1-10.apk
           if gh release view crawlervision-chapter1-v1 >/dev/null 2>&1; then
-            gh release upload crawlervision-chapter1-v1 CrawlerVision-Test.apk --clobber
+            gh release upload crawlervision-chapter1-v1 CrawlerVision-Chapters-1-10.apk --clobber
           else
-            gh release create crawlervision-chapter1-v1 CrawlerVision-Test.apk \
+            gh release create crawlervision-chapter1-v1 CrawlerVision-Chapters-1-10.apk \
               --title 'CrawlerVision Chapters 1-10 APK' \
               --notes 'Sideloadable CrawlerVision APK with Chapters 1-10, 44 bundled scene illustrations, and a chapter dropdown.'
           fi
