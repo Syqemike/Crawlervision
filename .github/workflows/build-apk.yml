@@ -45,6 +45,11 @@ jobs:
           test -f CrawlerVision/app/build.gradle
           test -f CrawlerVision/app/src/main/AndroidManifest.xml
 
+      - name: Apply source compatibility fix
+        run: |
+          sed -i 's/\.setTextAllCaps(false)/.setAllCaps(false)/g' CrawlerVision/app/src/main/java/com/example/crawlervision/MainActivity.java
+          ! grep -q 'setTextAllCaps' CrawlerVision/app/src/main/java/com/example/crawlervision/MainActivity.java
+
       - name: Build Android debug APK
         working-directory: CrawlerVision
         run: gradle --no-daemon --stacktrace assembleDebug
