@@ -1,0 +1,33 @@
+# Android and Gradle
+.gradle/
+**/build/
+local.properties
+.idea/
+*.iml
+.cxx/
+.externalNativeBuild/
+captures/
+
+# Never commit binaries, signing certificates or credentials
+*.apk
+*.aab
+*.jks
+*.keystore
+*.p12
+*.pfx
+*.pem
+*.env
+.env
+.env.*
+secrets.properties
+
+# OS and editors
+.DS_Store
+Thumbs.db
+.vscode/
+*.swp
+*.swo
+
+# Machine-local transient archives (existing tracked source archive remains tracked)
+*.tmp
+*.log
