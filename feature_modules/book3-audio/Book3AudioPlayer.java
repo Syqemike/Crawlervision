@@ -342,8 +342,14 @@ public final class Book3AudioPlayer {
                 durationMs = mp.getDuration();
                 long target = durationMs > 0 ?
                         Math.min(currentMs, Math.max(0L, durationMs - 1000L)) : currentMs;
-                mp.seekTo((int) Math.min(Integer.MAX_VALUE, target));
-                if (playWhenPrepared) mp.start();
+                // Begin only after the restored seek completes; avoids replaying from 0.
+                mp.setOnSeekCompleteListener(seeked -> {
+                    if (closed || seeked != player) return;
+                    if (playWhenPrepared) seeked.start();
+                    render();
+                });
+                if (target > 0L) mp.seekTo((int) Math.min(Integer.MAX_VALUE, target));
+                else if (playWhenPrepared) mp.start();
                 render();
             });
             next.setOnCompletionListener(mp -> {
@@ -512,8 +518,9 @@ public final class Book3AudioPlayer {
     }
 
     private static int naturalCompare(String a, String b) {
+        // Compare ALL numeric tokens so Book3_Chapter2 precedes Book3_Chapter10.
         Matcher ma = NUMBER.matcher(a), mb = NUMBER.matcher(b);
-        if (ma.find() && mb.find()) {
+        while (ma.find() && mb.find()) {
             try {
                 long na = Long.parseLong(ma.group(1));
                 long nb = Long.parseLong(mb.group(1));
